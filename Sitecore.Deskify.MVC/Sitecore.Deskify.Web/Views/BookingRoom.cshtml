@@ -1,0 +1,123 @@
+﻿<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Deskify</title>
+    <script src="https://kit.fontawesome.com/bf21391385.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light font-weight-bold" style="background-color:black" ;>
+        <div class="container-fluid">
+            <img class="hm-logo" alt="" style="height:80px" src="~/img/deskify_logo.svg" />
+            <a class="navbar-brand" asp-area="" asp-controller="Home" style="color:white;font-size:xx-large" asp-action="Index">Deskify_</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class="fa fa-navicon" aria-hidden="true" style="color:#fff; font-size:28px"></i></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a href="http://sitecore_deskify.local/employeeindex" class="nav-link text-white" asp-area="" asp-controller="Employee" asp-action="Index">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="http://sitecore_deskify.local/bookingseat" class="nav-link text-white" asp-area="" asp-controller="Employee" asp-action="BookingSeat">BookSeat</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://sitecore_deskify.local/bookingroom" class="nav-link text-white" asp-area="" asp-controller="Employee" asp-action="BookingRooms">BookRoom</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-uppercase" asp-area="" asp-controller="" asp-action="" style="font-size:large">
+                    <img class="img-fluid" style="height:28px;margin-right:20px" src="https://www.svgrepo.com/show/18861/bell.svg">
+                </a>
+            </div>
+            <div class="nav-item" style="margin-right:20px">
+                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#f0f8ff"><img class="img-fluid" style="height:28px" src="https://www.svgrepo.com/show/213315/avatar-profile.svg"></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="http://sitecore_deskify.local/profile" class="dropdown-item" asp-area="" asp-controller="Employee" asp-action="Profile"><img class="img-fluid" style="height:20px" src="https://www.svgrepo.com/show/318484/profile.svg">&nbsp; Profile</a>
+                    <a href="http://sitecore_deskify.local/login" class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index" style="color:red">&nbsp;<img class="img-fluid" style="height:14px" src="https://www.svgrepo.com/show/79009/logout.svg">&nbsp; Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<body style="background:-webkit-linear-gradient(left, #fff, #000)">
+    <section class="vh-70 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Room Booking</h3>
+                            <form method="post" enctype="multipart/form-data">
+                                <h2>Booking Room</h2><hr />
+
+
+                                @*<div class="form-group">
+            <label>Room Status</label>
+            <input type="text" asp-for="RoomStatus" class="form-control"
+                   placeholder="enter seatstatus" required />
+        </div>*@
+                                <div class="form-group">
+                                    <label>FromDate</label>
+                                    <input type="date" asp-for="FromDate" class="form-control"
+                                           placeholder="enter seat" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>ToDate</label>
+                                    <input type="date" asp-for="ToDate" class="form-control"
+                                           placeholder="enter status" required />
+                                </div>
+                                <div class="form-group">
+                                    <label>Meeting Hours</label>
+                                    <select asp-for="MeetingHours" class="form-control" asp-items="@ViewBag.meetingHours" required></select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Floor</label>
+                                    <select asp-for="Room.FloorId" class="form-control" asp-items="@ViewBag.FloorList" required></select>
+                                </div>
+
+                                <div class="col-12 mt-5" style="margin-left:510px">
+                                    <button type="reset" class="btn btn-outline-secondary float-end me-2">Reset</button>
+                                    <button type="submit" class="btn btn-primary float-end">Next</button>
+                                </div>
+                                <hr />
+                                @if (ViewBag.Status == "Ok")
+                                {
+                                    <div class="alert alert-success">
+                                        @ViewBag.message;
+                                    </div>
+                                }
+
+                                else if (ViewBag.Status == "Error")
+                                {
+                                    <div class="alert alert-danger">
+                                        @ViewBag.message;
+                                    </div>
+                                }
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+<footer class="footer text-muted" style="background-color:black">
+    <div class="container">
+        &copy; 2023 Deskify. All Rights Reserved.<a asp-area="" asp-controller="Home" asp-action="Privacy"></a>
+    </div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+
